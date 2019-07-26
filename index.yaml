@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  zenoss-agent-kubernetes:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2019-07-25T20:51:38.395105-05:00"
+    description: A Helm chart for zenoss-agent-kubernetes
+    digest: 624180e357811e18201cc791f9abe02269737810ae73b1b33da139119031b75c
+    name: zenoss-agent-kubernetes
+    urls:
+    - https://zenoss.github.io/charts/zenoss-agent-kubernetes-1.0.0.tgz
+    version: 1.0.0
+generated: "2019-07-25T20:51:38.394227-05:00"
