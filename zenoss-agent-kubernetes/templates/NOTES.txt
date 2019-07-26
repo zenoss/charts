@@ -1,0 +1,6 @@
+Run the following command to follow the {{ .Chart.Name }} logs.
+
+    kubectl -n kube-system logs -f \
+        $(kubectl -n kube-system get pods \
+            -l app.kubernetes.io/instance={{ .Release.Name }} \
+            -o jsonpath='{ .items[0].metadata.name }')
