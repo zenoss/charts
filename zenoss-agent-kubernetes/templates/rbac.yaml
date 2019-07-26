@@ -1,0 +1,42 @@
+{{- if .Values.rbac.create -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}
+  namespace: kube-system
+  labels:
+{{ include "zenoss-agent-kubernetes.labels" . | indent 4 }}
+---
+apiVersion: {{ include "rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: system:{{ include "zenoss-agent-kubernetes.fullname" . }}
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+{{ include "zenoss-agent-kubernetes.labels" . | indent 4 }}
+rules:
+- apiGroups: ["metrics.k8s.io"]
+  resources: ["nodes", "pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["nodes", "namespaces", "pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions", "apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: {{ include "rbac.apiVersion" . }}
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}
+  labels:
+{{ include "zenoss-agent-kubernetes.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:{{ include "zenoss-agent-kubernetes.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}
+  namespace: kube-system
+{{- end -}}

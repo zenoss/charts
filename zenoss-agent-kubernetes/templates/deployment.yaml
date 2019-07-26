@@ -1,0 +1,74 @@
+{{- $apiKeySecretName := include "zenoss.apiKeySecretName" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}
+  namespace: kube-system
+  labels:
+{{ include "zenoss-agent-kubernetes.labels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "zenoss-agent-kubernetes.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "zenoss-agent-kubernetes.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "zenoss-agent-kubernetes.fullname" . }}
+    {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: CLUSTER_NAME
+            value: {{ required "zenoss.clusterName must be set" .Values.zenoss.clusterName }}
+          {{- if .Values.zenoss.apiKey }}
+          {{- if .Values.zenoss.name }}
+          - name: ZENOSS_NAME
+            value: {{ .Values.zenoss.name }}
+          {{- end }}
+          {{- if .Values.zenoss.address }}
+          - name: ZENOSS_ADDRESS
+            value: {{ .Values.zenoss.address }}
+          {{- end }}
+          - name: ZENOSS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ $apiKeySecretName }}
+                key: api-key
+          {{- end }}
+          {{- range $i, $endpoint := .Values.zenoss.endpoints }}
+          - name: ZENOSS{{ add $i 1 }}_NAME
+            value: {{ required "zenoss.endpoints[].name must be set" $endpoint.name }}
+          {{- if $endpoint.address }}
+          - name: ZENOSS{{ add $i 1 }}_ADDRESS
+            value: {{ $endpoint.address }}
+          {{- end }}
+          - name: ZENOSS{{ add $i 1 }}_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ $apiKeySecretName }}-{{ $endpoint.name }}
+                key: api-key
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end -}}
