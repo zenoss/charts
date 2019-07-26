@@ -21,6 +21,10 @@ the [Helm] package manager.
 
 - Kubernetes 1.8+
 - [Kubernetes Metrics Server]
+- Helm
+
+See the [Helm Quickstart Guide] if you don't already have Helm running on your
+cluster.
 
 ## Installing the Chart
 
@@ -96,6 +100,7 @@ $ helm install --name my-release -f values.yaml zenoss/zenoss-agent-kubernetes
 ```
 
 [Helm]: https://helm.sh/
+[Helm Quickstart Guide]: https://helm.sh/docs/using_helm/#quickstart
 [Kubernetes]: https://kubernetes.io/
 [Kubernetes Metrics Server]: https://github.com/kubernetes-incubator/metrics-server
 [Zenoss]: https://www.zenoss.com/
