@@ -6,7 +6,7 @@ Applications provided by Zenoss, ready to launch on Kubernetes using
 ## Usage
 
 ```bash
-helm repo add zenoss https://charts.zenoss.com
+helm repo add zenoss https://zenoss.github.io/charts/
 helm search zenoss
 ```
 

@@ -6,7 +6,7 @@ cluster and sends them to [Zenoss].
 ## Basic Usage
 
 ```bash
-$ helm repo add zenoss https://charts.zenoss.com
+$ helm repo add zenoss https://zenoss.github.io/charts/
 $ helm install zenoss/zenoss-agent-kubernetes \
     --set zenoss.clusterName=<K8S_CLUSTER_NAME> \
     --set zenoss.apiKey=<ZENOSS_API_KEY>
@@ -27,7 +27,7 @@ the [Helm] package manager.
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm repo add zenoss https://charts.zenoss.com
+$ helm repo add zenoss https://zenoss.github.io/charts/
 $ helm install zenoss/zenoss-agent-kubernetes \
     --name my-release \
     --set zenoss.clusterName=<K8S_CLUSTER_NAME> \
