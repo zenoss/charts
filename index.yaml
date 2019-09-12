@@ -1,5 +1,15 @@
 apiVersion: v1
 entries:
+  prometheus-zenoss-adapter:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2019-09-12T10:53:30.669549-04:00"
+    description: A Helm chart for Kubernetes
+    digest: deae15016885952b2812c90b30a13764bc101a7cfd76fdeb54505a9ad7b7f680
+    name: prometheus-zenoss-adapter
+    urls:
+    - https://zenoss.github.io/charts/prometheus-zenoss-adapter-0.1.0.tgz
+    version: 0.1.0
   zenoss-agent-kubernetes:
   - apiVersion: v1
     appVersion: 1.0.0
