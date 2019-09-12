@@ -13,6 +13,7 @@ helm search zenoss
 ## Zenoss Charts
 
 - [zenoss-agent-kubernetes](https://github.com/zenoss/charts/tree/master/zenoss-agent-kubernetes)
+- [prometheus-zenoss-adapter](https://github.com/zenoss/charts/tree/master/prometheus-zenoss-adapter)
 
 # License
 
