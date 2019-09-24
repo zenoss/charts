@@ -39,6 +39,10 @@ spec:
           - name: ZENOSS_SOURCE
             value: {{ .Values.zenoss.source }}
           {{- end }}
+          {{- if .Values.logLevel }}
+          - name: LOG_LEVEL
+            value: {{ .Values.logLevel }}
+          {{- end }}
           - name: GRPC_LISTEN_ADDR
             value: :80
           ports:

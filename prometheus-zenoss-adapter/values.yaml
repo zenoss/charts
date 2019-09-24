@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+logLevel: error
+
 zenoss:
 
   ## @param zenoss.address - string - required
