@@ -69,7 +69,7 @@ and deletes the release.
 | `rbac.create`                              | Whether RBAC resources should be created                                     | `true`                           |
 | `rbac.serviceAccountName`                  | Existing serviceAccountName to use if `rbac.create` is `false`               | `default`                        |
 | `image.repository`                         | Image repository                                                             | `zenoss/zenoss-agent-kubernetes` |
-| `image.tag`                                | Image tag                                                                    | `latest`                         |
+| `image.tag`                                | Image tag                                                                    | `1.0.0`                          |
 | `image.pullPolicy`                         | Image pull policy                                                            | `IfNotPresent`                   |
 | `image.pullSecrets`                        | Docker registry secret names as an array                                     | `[]`                             |
 | `resources`                                | CPU/Memory resource requests/limits                                          | `{}`                             |
