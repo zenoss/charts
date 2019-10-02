@@ -22,6 +22,11 @@ zenoss:
   #
   # apiKeyExistingSecret: ""
 
+  ## @param zenoss.devMode - boolean - optional
+  ## If enabled, the adapter will be run in 'development mode'.  No data
+  ## will be sent to Zenoss.
+  devMode: false
+
 
 replicaCount: 1
 

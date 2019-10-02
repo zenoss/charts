@@ -39,6 +39,10 @@ spec:
           - name: ZENOSS_SOURCE
             value: {{ .Values.zenoss.source }}
           {{- end }}
+          {{- if .Values.zenoss.devMode }}
+          - name: ZENOSS_DEV_MODE
+            value: 1
+          {{- end }}
           {{- if .Values.logLevel }}
           - name: LOG_LEVEL
             value: {{ .Values.logLevel }}
