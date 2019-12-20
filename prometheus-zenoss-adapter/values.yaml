@@ -6,6 +6,11 @@ logLevel: error
 
 zenoss:
 
+  ## @param zenoss.source - string - optional
+  ## Identify the source of the data being sent by this adaptor, typically the
+  ## prometheus or k8s cluster.
+  # source: ""
+
   ## @param zenoss.address - string - required
   ## Zenoss API endpoint address: <name>:<port>
   #
