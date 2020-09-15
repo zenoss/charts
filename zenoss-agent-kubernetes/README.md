@@ -84,7 +84,6 @@ Specify each parameter using the `--set key=value[,key=value]` argument to
 
 ```console
 $ helm install \
-    --name my-release \
     --set zenoss.clusterName=<K8S_CLUSTER_NAME> \
     --set zenoss.apiKey=<ZENOSS_API_KEY> \
     zenoss/zenoss-agent-kubernetes
