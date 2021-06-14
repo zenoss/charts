@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "zenoss-agent-kubernetes.fullname" . }}
-  namespace: kube-system
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "zenoss-agent-kubernetes.labels" . | indent 4 }}
 spec:
