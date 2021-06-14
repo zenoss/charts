@@ -3,39 +3,48 @@ entries:
   prometheus-zenoss-adapter:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-12-20T15:48:16.682536-05:00"
+    created: "2021-06-14T14:21:50.451810079-04:00"
     description: A Helm chart for prometheus-zenoss-adapter
     digest: 5f0d53b214fbac188f532bb0e13174d798884b616389105426fd91184d2128d5
     name: prometheus-zenoss-adapter
     urls:
-    - https://zenoss.github.io/charts/prometheus-zenoss-adapter-0.1.4.tgz
+    - prometheus-zenoss-adapter-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-12-20T15:48:16.681677-05:00"
+    created: "2021-06-14T14:21:50.451276564-04:00"
     description: A Helm chart for Kubernetes
     digest: 40ce4764c3f1f05b41c90c2694fe259a2dabe149b69fed0efdb59920a0ebce6f
     name: prometheus-zenoss-adapter
     urls:
-    - https://zenoss.github.io/charts/prometheus-zenoss-adapter-0.1.3.tgz
+    - prometheus-zenoss-adapter-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-10-02T15:52:49.402725-04:00"
+    created: "2021-06-14T14:21:50.450834135-04:00"
     description: A Helm chart for Kubernetes
     digest: 44fc4d7b7d3ea8e314962dad93a796b61ec80945baf109396b4e722ef156de4a
     name: prometheus-zenoss-adapter
     urls:
-    - https://zenoss.github.io/charts/prometheus-zenoss-adapter-0.1.2.tgz
+    - prometheus-zenoss-adapter-0.1.2.tgz
     version: 0.1.2
   zenoss-agent-kubernetes:
   - apiVersion: v1
+    appVersion: 1.2.0
+    created: "2021-06-14T14:21:50.452681083-04:00"
+    description: A Helm chart for zenoss-agent-kubernetes
+    digest: a351c907dbaccb733b29647d4a1c5f96ad068ae05bf7f0846b7b956eba06b51f
+    name: zenoss-agent-kubernetes
+    urls:
+    - zenoss-agent-kubernetes-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
     appVersion: 1.0.0
-    created: "2019-12-20T15:48:16.683939-05:00"
+    created: "2021-06-14T14:21:50.452240314-04:00"
     description: A Helm chart for zenoss-agent-kubernetes
     digest: a82d65d161743643883a67a72b67af3e40d040e6516c058ec96a012880598740
     name: zenoss-agent-kubernetes
     urls:
-    - https://zenoss.github.io/charts/zenoss-agent-kubernetes-1.0.0.tgz
+    - zenoss-agent-kubernetes-1.0.0.tgz
     version: 1.0.0
-generated: "2019-12-20T15:48:16.680479-05:00"
+generated: "2021-06-14T14:21:50.450257221-04:00"
