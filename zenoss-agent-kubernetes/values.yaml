@@ -69,7 +69,7 @@ rbac:
 
 image:
   repository: zenoss/zenoss-agent-kubernetes
-  tag: 1.0.0
+  tag: 1.2.0
   pullPolicy: IfNotPresent
   pullSecrets: []
 
