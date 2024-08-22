@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}-configs
+data:
+  agent.yaml: |
+    agent:
+      name: zdatamon
+      source: {{ required "zenoss.clusterName must be set" .Values.zenoss.clusterName }}
+      defaultInterval: {{ .Values.agent.collectionInterval }}
+    configurationSource:
+      local:
+        - name: "default local config"
+          directory: "/etc/zdatamon/configs"
+
+    datasinks:
+      - name: {{ .Values.zenoss.name }}
+        type: zenoss
+        conf:
+          address: {{ .Values.zenoss.address }}
+          apiKey: _ZDM_ENV_ZENOSS_API_KEY
+          useCompact: {{ .Values.zenoss.useCompact }}
+          {{- if .Values.zenoss.insecureTLS }}
+          endpoint:
+            insecureTLS: true
+          {{- end }}
+
+      {{- if .Values.zenoss.logUpdates }}
+      - name: {{ .Values.zenoss.name }}-debug
+        type: zenoss
+        conf:
+          logOnly: true
+      {{- end }}
+
+      {{- range $i, $endpoint := .Values.zenoss.endpoints }}
+      - name: {{ required "zenoss.endpoints[].name must be set" $endpoint.name }}
+        type: zenoss
+        conf:
+          address: {{ required "zenoss.endpoints[].address must be set" $endpoint.address }}
+          apiKey: _ZDM_ENV_ZENOSS{{ add $i 1 }}_API_KEY
+          useCompact: {{ $endpoint.useCompact }}
+          {{- if $endpoint.insecureTLS }}
+          endpoint:
+            insecureTLS: true
+          {{- end }}
+      {{- end }}          
+    
+  logconfig.props: |
+    default:info
+    datasource.kubernetesagent:{{ .Values.agent.logLevel }}
+    datasink.zenoss:error
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "zenoss-agent-kubernetes.fullname" . }}-ds-configs
+data:
+
+  kubernetesagent.yaml: |
+    apiVersion: v1
+    kind: datasource
+    name: kubernetesagent
+    spec:
+      type: kubernetesagent
+      datasource:
+        interval: {{ .Values.agent.collectionInterval }}
+        customClusterName: {{ required "zenoss.clusterName must be set" .Values.zenoss.clusterName }}
