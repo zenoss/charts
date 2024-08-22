@@ -30,6 +30,16 @@ entries:
     version: 0.1.2
   zenoss-agent-kubernetes:
   - apiVersion: v1
+    appVersion: v1.2.0
+    created: "2024-08-22T20:44:06.434948022Z"
+    description: A Helm chart for zenoss-agent-kubernetes
+    digest: 0f85e627b0769b4e23d32325c7a474b191675508941f6df75ee7c4975e4116d8
+    icon: data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiPgogICAgPHBhdGggZD0iTTIuODM0IDQuMzc3YTEwLjI0IDEwLjI0IDAgMCAxIDIuNDI4IDIuNDI4Yy4xNjQuMjMzLjMxMS40NjcKICAgICAgICAuNDUxLjcwOEExNS4yNTEgMTUuMjUxIDAgMCAxIDI3LjgzNiA4Ljc4QzI1LjIyOSAzLjIyNSAxNC4yOTYKICAgICAgICAtMy4wMDcyLjgzNCA0LjM3N3oiCiAgICAvPgogICAgPHBhdGggZD0iTTI4LjQ1IDE4LjY0QTEyLjI1NSAxMi4yNTUgMCAxIDEgMTYuMTk1IDYuMzkyYzYuNzY1IDAgMTIuMjUxCiAgICAgICAgNS40ODMgMTIuMjU1IDEyLjI0OHptLTEyLjI1NS02LjY5MmE2LjY5MiA2LjY5MiAwIDEgMCAwIDEzLjM4NAogICAgICAgIDYuNjkyIDYuNjkyIDAgMCAwIDAtMTMuMzg0eiIKICAgIC8+Cjwvc3ZnPgo=
+    name: zenoss-agent-kubernetes
+    urls:
+    - https://github.com/zenoss/charts/releases/download/zenoss-agent-kubernetes-2.0.0/zenoss-agent-kubernetes-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v1
     appVersion: 1.2.0
     created: "2021-06-14T14:21:50.452681083-04:00"
     description: A Helm chart for zenoss-agent-kubernetes
@@ -47,4 +57,4 @@ entries:
     urls:
     - zenoss-agent-kubernetes-1.0.0.tgz
     version: 1.0.0
-generated: "2021-06-14T14:21:50.450257221-04:00"
+generated: "2024-08-22T20:44:06.434979057Z"
