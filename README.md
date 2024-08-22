@@ -7,6 +7,7 @@ Applications provided by Zenoss, ready to launch on Kubernetes using
 
 ```bash
 helm repo add zenoss https://zenoss.github.io/charts/
+helm repo update
 helm search zenoss
 ```
 
@@ -17,7 +18,7 @@ helm search zenoss
 
 # License
 
-Copyright (c) 2019 Zenoss, Inc.
+Copyright (c) 2024 Zenoss, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
