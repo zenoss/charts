@@ -25,33 +25,31 @@ spec:
     {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+          - /bin/zdm
+          - run
+          - --config-file=/etc/zdatamon/agent.yaml
+          - --logconfig=/etc/zdatamon/logconfig.props
+          - --logconfig-watch
           env:
-          - name: CLUSTER_NAME
-            value: {{ required "zenoss.clusterName must be set" .Values.zenoss.clusterName }}
-          {{- if .Values.zenoss.apiKey }}
-          {{- if .Values.zenoss.name }}
-          - name: ZENOSS_NAME
-            value: {{ .Values.zenoss.name }}
-          {{- end }}
-          {{- if .Values.zenoss.address }}
-          - name: ZENOSS_ADDRESS
-            value: {{ .Values.zenoss.address }}
-          {{- end }}
+          - name: K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: K8S_POD
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
           - name: ZENOSS_API_KEY
             valueFrom:
               secretKeyRef:
                 name: {{ $apiKeySecretName }}
                 key: api-key
-          {{- end }}
           {{- range $i, $endpoint := .Values.zenoss.endpoints }}
-          - name: ZENOSS{{ add $i 1 }}_NAME
-            value: {{ required "zenoss.endpoints[].name must be set" $endpoint.name }}
-          {{- if $endpoint.address }}
-          - name: ZENOSS{{ add $i 1 }}_ADDRESS
-            value: {{ $endpoint.address }}
-          {{- end }}
           - name: ZENOSS{{ add $i 1 }}_API_KEY
             valueFrom:
               secretKeyRef:
@@ -60,6 +58,18 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: zdatamon-configs
+            mountPath: /etc/zdatamon
+          - name: zdatamon-ds-configs
+            mountPath: /etc/zdatamon/configs
+      volumes:
+      - name: zdatamon-configs
+        configMap:
+          name: {{ include "zenoss-agent-kubernetes.fullname" . }}-configs
+      - name: zdatamon-ds-configs
+        configMap:
+          name: {{ include "zenoss-agent-kubernetes.fullname" . }}-ds-configs
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

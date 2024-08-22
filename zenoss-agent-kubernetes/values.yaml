@@ -1,33 +1,48 @@
 # Default values for zenoss-agent-kubernetes.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+agent:
+  ## @param collectionInterval - string - optional
+  ## Collection interval (default is 5 minutes)
+  collectionInterval: 300s
+
+  ## @param logLevel - string - optional
+  ## If set, change the log level of the kubernetesagent datasource from info to specified level
+  logLevel: info
 
 zenoss:
   ## @param zenoss.clusterName - string - required
   ## Set a unique name for this cluster in Zenoss.
-  #
-  # clusterName: ""
+  clusterName: ""
 
   ## @param zenoss.name - string - required
   ## Arbitrary name for Zenoss endpoint to differentiate it from others.
-  #
-  # name: default
+  name: zenoss
 
   ## @param zenoss.address - string - required
   ## Zenoss API endpoint address: <name>:<port>
-  #
-  # address: api.zenoss.io:443
+  address: api.zenoss.io:443
 
   ## @param zenoss.apiKey - string - required
   ## Set this to your Zenoss API key.
-  #
-  # apiKey: ""
+  apiKey: ""
 
   ## @param zenoss.apiKeyExistingSecret - string - optional
   ## Use existing Secret which stores API key instead of creating a new one.
   ## If set, this parameter takes precedence over "apiKey".
-  #
   # apiKeyExistingSecret: ""
+
+  ## @param zenoss.logUpdates - boolean - optional
+  ## If true, log all updates that are being sent to zenoss
+  logUpdates: false
+
+  ## @param zenoss.useCompact - boolean - optional
+  # Use compact metrics (defaults to true)
+  useCompact: true
+
+  ## @param zenoss.insecureTLS - boolean - optional
+  # Allow insecure TLS (defaults to false)
+  insecureTLS: false
 
   ## @param zenoss.endpoints - map - optional
   ## Optional list of additional Zenoss endpoints.
@@ -37,7 +52,7 @@ zenoss:
     ## @param zenoss.endpoints[].name - string - required
     ## Arbitrary name for Zenoss endpoint to differentiate it from others.
     #
-    # - name: staging
+    # name: staging
 
     ## @param zenoss.endpoints[].address - string - required
     ## Zenoss API endpoint address: <name>:<port>
@@ -55,21 +70,29 @@ zenoss:
     #
     # apiKeyExistingSecret: <ZENOSS_API_KEY_SECRET>
 
+    ## @param zenoss.endpoints[].useCompact - boolean - optional
+    # Use compact metrics (defaults to true)
+    # useCompact: true
+
+    ## @param zenoss.endpoints[].insecureTLS - boolean - optional
+    # Allow insecure TLS (defaults to false)
+    # insecureTLS: false
+
 rbac:
 
   ## @param rbac.create - boolean - required
   ## If true, create & use RBAC resources
-  #
   create: true
 
   ## @param rbac.serviceAccountName - string - required
   ## Ignored if rbac.create is true
-  #
   serviceAccountName: default
 
 image:
-  repository: zenoss/zenoss-agent-kubernetes
-  tag: 1.2.0
+  repository: zenoss/zdatamon
+
+  # tag defaults to this chart's appVersion.
+  tag: ""
   pullPolicy: IfNotPresent
   pullSecrets: []
 

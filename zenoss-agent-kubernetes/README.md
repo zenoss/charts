@@ -57,19 +57,27 @@ and deletes the release.
 
 | Parameter                                  | Description                                                                  | Default                          |
 | ------------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------- |
+| agent.collectionInterval                   | Collection polling cycle for kubernetes datasource                           | `300s`                           |
+| agent.logLevel                             | Log level for kubernetes datasource                                          | `debug`                          |
 | `zenoss.clusterName`                       | Set a unique name for the Kubernetes cluster entity in Zenoss                | `nil`                            |
 | `zenoss.name`                              | Arbitrary name for Zenoss endpoint to differentiate it from others           | `default`                        |
 | `zenoss.address`                           | Zenoss API endpoint address: <name>:<port>                                   | `api.zenoss.io:443`              |
 | `zenoss.apiKey`                            | Zenoss API key                                                               | `nil`                            |
 | `zenoss.apiKeyExistingSecret`              | Existing Kubernetes secret containing Zenoss API key in `api-key` key        | `nil`                            |
+| `zenoss.insecureTLS`                       | Allow insecure TLS connections to the zenoss endpoint                        | `false`                          |
+| `zenoss.logUpdates`                        | Log all updates that are sent to zenoss                                      | `false`                          |
+| `zenoss.useCompact`                        | Send compact metrics to zenoss                                               | `true`                           |
 | `zenoss.endpoints[0].name`                 | Name for additional Zenoss endpoint                                          | `nil`                            |
 | `zenoss.endpoints[0].address`              | Address for additional Zenoss endpoint: <name>:<port>                        | `api.zenoss.io:443`              |
 | `zenoss.endpoints[0].apiKey`               | API key for additional Zenoss endpoint                                       | `nil`                            |
 | `zenoss.endpoints[0].apiKeyExistingSecret` | Existing Kubernetes secret containing API key for additional Zenoss endpoint | `nil`                            |
+| `zenoss.endpoints[0].insecureTLS`          | Allow insecure TLS connections to the zenoss endpoint                        | `false`                          |
+| `zenoss.endpoints[0].logUpdates`           | Log all updates that are sent to zenoss                                      | `false`                          |
+| `zenoss.endpoints[0].useCompact`           | Send compact metrics to zenoss                                               | `true`                           |
 | `rbac.create`                              | Whether RBAC resources should be created                                     | `true`                           |
 | `rbac.serviceAccountName`                  | Existing serviceAccountName to use if `rbac.create` is `false`               | `default`                        |
-| `image.repository`                         | Image repository                                                             | `zenoss/zenoss-agent-kubernetes` |
-| `image.tag`                                | Image tag                                                                    | `1.0.0`                          |
+| `image.repository`                         | Image repository                                                             | `zenoss/zdatamon`                |
+| `image.tag`                                | Image tag                                                                    | current version                  |
 | `image.pullPolicy`                         | Image pull policy                                                            | `IfNotPresent`                   |
 | `image.pullSecrets`                        | Docker registry secret names as an array                                     | `[]`                             |
 | `resources`                                | CPU/Memory resource requests/limits                                          | `{}`                             |
@@ -84,6 +92,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to
 
 ```console
 $ helm install \
+    --name my-release \
     --set zenoss.clusterName=<K8S_CLUSTER_NAME> \
     --set zenoss.apiKey=<ZENOSS_API_KEY> \
     zenoss/zenoss-agent-kubernetes
