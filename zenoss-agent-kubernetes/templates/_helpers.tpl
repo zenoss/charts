@@ -16,6 +16,9 @@ If release name contains chart name it will be used as a full name.
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if regexMatch "[\\._]" .Release.Name }}
+{{- fail "Release name is invalid. It must not contain _ or ." -}}
+{{- end}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
