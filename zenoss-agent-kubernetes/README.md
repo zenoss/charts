@@ -7,9 +7,10 @@ cluster and sends them to [Zenoss].
 
 ```bash
 $ helm repo add zenoss https://zenoss.github.io/charts/
-$ helm install zenoss/zenoss-agent-kubernetes \
+$ helm install MY_RELEASE_NAME zenoss/zenoss-agent-kubernetes \
     --set zenoss.clusterName=<K8S_CLUSTER_NAME> \
     --set zenoss.apiKey=<ZENOSS_API_KEY>
+    --set zenoss.address=<ZENOSS_API_ADDRESS>
 ```
 
 ## Introduction
