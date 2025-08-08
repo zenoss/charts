@@ -65,3 +65,4 @@ data:
       datasource:
         interval: {{ .Values.agent.collectionInterval }}
         customClusterName: {{ required "zenoss.clusterName must be set" .Values.zenoss.clusterName }}
+        clusterName: {{ default .Values.zenoss.clusterName .Values.zenoss.actualClusterName }}
