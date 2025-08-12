@@ -15,6 +15,10 @@ zenoss:
   ## Set a unique name for this cluster in Zenoss.
   clusterName: ""
 
+  ## @param zenoss.actualClusterName - string - optional
+  ## Set the actual name of the cluster if it is different than zenoss.clusterName.
+  actualClusterName: ""
+
   ## @param zenoss.name - string - required
   ## Arbitrary name for Zenoss endpoint to differentiate it from others.
   name: zenoss
