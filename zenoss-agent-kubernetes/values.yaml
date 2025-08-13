@@ -120,3 +120,6 @@ affinity: {}
 
 nameOverride: ""
 fullnameOverride: ""
+
+global:
+  imagePullSecrets: []
