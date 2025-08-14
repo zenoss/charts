@@ -96,7 +96,7 @@ image:
   repository: zenoss/zdatamon
 
   # tag defaults to this chart's appVersion.
-  tag: ""
+  tag: "dev-k8s-test-30"
   pullPolicy: IfNotPresent
   pullSecrets: []
 
